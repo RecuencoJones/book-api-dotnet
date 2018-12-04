@@ -10,7 +10,7 @@ namespace BookApi.Repositories
 
     public BookRepository(BookContext context)
     {
-      this._context = context;
+      _context = context;
     }
 
     public List<Book> FindAll() => _context.Books.ToList();

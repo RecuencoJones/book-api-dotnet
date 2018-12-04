@@ -11,7 +11,7 @@ namespace BookApi.Services
 
     public BookService(IBookRepository Repository)
     {
-      this._repository = Repository;
+      _repository = Repository;
     }
 
     public List<Book> GetAll() => _repository.FindAll();
