@@ -9,7 +9,7 @@ dotnet watch run
 ## Production
 
 ```
-dotnet build -o out
+dotnet publish -c Release -o out
 dotnet ./out/book-api.dll
 ```
 
@@ -17,5 +17,5 @@ dotnet ./out/book-api.dll
 
 ```
 docker build -t book-api .
-docker run -dit --name book-api -p 5000:5000 book-api
+docker run -dit --name book-api -p 5000:80 book-api
 ```

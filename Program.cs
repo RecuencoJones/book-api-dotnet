@@ -14,11 +14,18 @@ namespace BookApi
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            BuildWebHost(args).Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var isDevelopment = env == EnvironmentName.Development;
+
+            return WebHost.CreateDefaultBuilder(args)
+                .SuppressStatusMessages(!isDevelopment)
+                .UseStartup<Startup>()
+                .Build();
+        }
     }
 }

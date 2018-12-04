@@ -18,17 +18,14 @@ namespace BookApi
         {
             services
                 .AddDbContext<BookContext>(opt => opt.UseInMemoryDatabase("books"))
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .AddMvcCore()
+                .AddFormatterMappings()
+                .AddJsonFormatters()
+                .AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseMvc();
         }
     }

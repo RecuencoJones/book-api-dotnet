@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:57311",
-      "sslPort": 44306
+      "applicationUrl": "http://localhost:5015",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
     },
     "BookApi": {
       "commandName": "Project",
-      "applicationUrl": "http://localhost:5000;https://localhost:5001",
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
