@@ -1,32 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using BookApi.Models;
+using BookApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookApi.Controllers
 {
   [Produces("application/json")]
-  [Route("api/books")]
+  [Route("api/[controller]")]
   [ApiController]
-  public class BookController : ControllerBase
+  public class BooksController : ControllerBase
   {
-    private readonly BookContext _context;
+    private readonly BookService _bookService;
 
-    public BookController(BookContext context)
+    public BooksController(BookService bookService)
     {
-      _context = context;
+      _bookService = bookService;
     }
 
     [HttpGet]
-    public ActionResult<List<Book>> GetAll()
-    {
-      return _context.Books.ToList();
-    }
+    public ActionResult<List<Book>> GetAll() => _bookService.FindAll();
 
     [HttpGet("{id}")]
     public ActionResult<Book> GetByISBN(string id)
     {
-      var book = _context.Books.Find(id);
+      var book = _bookService.FindById(id);
 
       if (book == null)
       {
@@ -39,10 +37,9 @@ namespace BookApi.Controllers
     [HttpPost]
     public ActionResult<Book> Create(Book book)
     {
-      _context.Books.Add(book);
-      _context.SaveChanges();
+      var id = _bookService.Add(book);
 
-      return CreatedAtAction(nameof(GetByISBN), new { id = book.ISBN }, book);
+      return CreatedAtAction(nameof(GetByISBN), new { id = id }, book);
     }
   }
 }

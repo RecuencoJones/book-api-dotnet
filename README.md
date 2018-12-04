@@ -3,14 +3,20 @@
 ## Development
 
 ```
-dotnet watch run
+dotnet watch -p BookApi run
+```
+
+## Tests
+
+```
+dotnet test BookApi.Tests
 ```
 
 ## Production
 
 ```
-dotnet publish -c Release -o out
-dotnet ./out/book-api.dll
+dotnet publish BookApi -c Release -o out
+dotnet ./BookApi/out/book-api.dll
 ```
 
 ## Dockerize

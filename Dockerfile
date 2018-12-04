@@ -2,6 +2,6 @@ FROM microsoft/dotnet:aspnetcore-runtime
 
 WORKDIR /app
 
-COPY ./out .
+COPY ./BookApi/out .
 
-ENTRYPOINT ["dotnet", "book-api.dll"]
+ENTRYPOINT ["dotnet", "BookApi.dll"]
