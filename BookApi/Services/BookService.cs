@@ -1,28 +1,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using BookApi.Models;
+using BookApi.Repositories;
 
 namespace BookApi.Services
 {
-  public class BookService
+  public class BookService : IBookService
   {
-    private readonly BookContext _context;
+    private readonly IBookRepository _repository;
 
-    public BookService(BookContext context)
+    public BookService(IBookRepository Repository)
     {
-      this._context = context;
+      this._repository = Repository;
     }
 
-    public List<Book> FindAll() => _context.Books.ToList();
+    public List<Book> GetAll() => _repository.FindAll();
 
-    public Book FindById(string isbn) => _context.Books.Find(isbn);
+    public Book GetByISBN(string isbn) => _repository.FindById(isbn);
 
-    public string Add(Book book)
-    {
-      _context.Books.Add(book);
-      _context.SaveChanges();
-
-      return book.ISBN;
-    }
+    public string Add(Book book) => _repository.Add(book);
   }
 }

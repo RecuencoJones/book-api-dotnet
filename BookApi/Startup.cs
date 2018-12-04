@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookApi.Models;
+using BookApi.Repositories;
 using BookApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,7 +19,8 @@ namespace BookApi
     public void ConfigureServices(IServiceCollection services)
     {
       services
-          .AddScoped<BookService>()
+          .AddScoped<IBookService, BookService>()
+          .AddScoped<IBookRepository, BookRepository>()
           .AddDbContext<BookContext>(opt => opt.UseInMemoryDatabase("books"))
           .AddMvcCore()
           .AddFormatterMappings()
