@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace BookApi.Models
 {
@@ -8,6 +10,13 @@ namespace BookApi.Models
     [Key]
     public string ISBN { get; set; }
     public string Name { get; set; }
-    public List<Tag> Tags { get; set; }
+
+    [NotMapped]
+    public List<string> Tags { get; set; }
+
+    public Book()
+    {
+      Tags = new string[] { }.ToList();
+    }
   }
 }
